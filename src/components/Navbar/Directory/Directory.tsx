@@ -9,6 +9,7 @@ import {
   Text
 } from '@chakra-ui/react';
 import { TiHome } from 'react-icons/ti';
+import Communities from './Communities';
 
 const UserMenu: React.FC = () => {
   return (
@@ -42,8 +43,7 @@ const UserMenu: React.FC = () => {
         </Flex>
       </MenuButton>
       <MenuList>
-        {/* <Communities /> */}
-        Communities
+        <Communities />
       </MenuList>
     </Menu>
   );
