@@ -1,6 +1,6 @@
 import { Input, Button, Flex, Text } from '@chakra-ui/react';
 import { User } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
+import { collection, setDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useSetRecoilState } from 'recoil';
@@ -50,7 +50,7 @@ const SignUp: React.FC = () => {
   };
 
   const createUserDocument = async (user: User) => {
-    await addDoc(
+    await setDoc(
       collection(firestore, "users"),
       JSON.parse(JSON.stringify(user))
     );
