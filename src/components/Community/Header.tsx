@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
               top={-3}
               color='blue.500'
               border='4px solid white'
-              borderRadius='50%'
+              borderRadius='full'
             />
           )}
           <Flex padding='10px 16px'>
