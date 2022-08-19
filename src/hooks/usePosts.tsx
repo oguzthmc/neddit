@@ -13,7 +13,10 @@ const usePosts = () => {
 
   return {
     postStateValue,
-    setPostStateValue
+    setPostStateValue,
+    onVote,
+    onSelectPost,
+    onDeletePost
   };
 };
 export default usePosts;
