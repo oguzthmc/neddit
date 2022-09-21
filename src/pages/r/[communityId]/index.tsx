@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { doc, getDoc } from 'firebase/firestore';
 import { GetServerSidePropsContext } from 'next';
-import React from 'react';
-import { Community } from '../../../atoms/communitiesAtom';
+import React, { useEffect } from 'react';
+import { Community, communityState } from '../../../atoms/communitiesAtom';
 import { firestore } from '../../../firebase/clientApp';
 import safeJsonStringfy from 'safe-json-stringify';
 import NotFound from '../../../components/Community/NotFound';
@@ -9,6 +10,8 @@ import Header from '../../../components/Community/Header';
 import PageContent from '../../../components/Layout/PageContent';
 import CreatePostLink from '../../../components/Community/CreatePostLink';
 import Posts from '../../../components/Posts/Posts';
+import { useRecoilState } from 'recoil';
+import About from '../../../components/Community/About';
 
 type CommunityPageProps = {
   communityData: Community;
@@ -16,10 +19,19 @@ type CommunityPageProps = {
 
 const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
   console.log("here is data", communityData);
+  const [communityStateValue, setCommunityStateValue] = useRecoilState(communityState);
 
   if (!communityData) {
     return <NotFound />;
-  };
+  }
+
+  useEffect(() => {
+    setCommunityStateValue((prev) => ({
+      ...prev,
+      currentCommunity: communityData,
+    }));
+  }, [setCommunityStateValue, communityData]);
+
 
   return (
     <>
@@ -30,7 +42,7 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
           <Posts communityData={communityData} />
         </>
         <>
-          <div>RHS</div>
+          <About communityData={communityData} />
         </>
       </PageContent>
     </>
